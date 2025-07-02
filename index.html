@@ -14,11 +14,9 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        /* --- 新增的 @font-face 規則 --- */
         @font-face {
-            font-family: 'ChenYuluoyan'; /* 自訂字體名稱 */
-            /* 根據您提供的路徑 */
-            src: url('./fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
+            font-family: 'ChenYuluoyan';
+            src: url('./Plant/fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
         }
@@ -37,7 +35,7 @@
             font-weight: 500;
         }
         body.dark {
-            background-color: #0d1120; /* 後備顏色 */
+            background-color: #0d1120;
             background-image: linear-gradient(160deg, #191e3e 0%, #0d1120 100%);
             background-attachment: fixed;
         }
@@ -49,9 +47,17 @@
             height: 100%;
             z-index: -1;
         }
-        /* --- 新增的字體樣式 class --- */
         .font-chenyu {
-            font-family: 'ChenYuluoyan', 'Noto Sans TC', sans-serif; /* 將辰宇落雁體設為優先，並保留備用字體 */
+            font-family: 'ChenYuluoyan', 'Noto Sans TC', sans-serif;
+        }
+        /* 隱藏YouTube播放器 */
+        #youtube-player-container {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 0;
+            height: 0;
+            opacity: 0;
         }
     </style>
 </head>
@@ -59,11 +65,19 @@
 
     <canvas id="particle-canvas"></canvas>
 
+    <!-- ===== YouTube 播放器容器與控制按鈕 ===== -->
+    <div id="youtube-player-container"></div>
+    <div id="music-control" class="fixed bottom-5 right-5 z-50">
+        <button id="toggle-music-btn" class="w-12 h-12 bg-sky-500/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-sky-500/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-400">
+            <!-- 預設為靜音圖示 -->
+            <i data-lucide="volume-x" class="w-6 h-6"></i>
+        </button>
+    </div>
+    <!-- ======================================= -->
+
     <div class="container mx-auto px-4 py-8 md:py-16 relative z-10">
 
         <header class="text-center mb-8">
-            <!-- V19: 恢復預設字體與大小 -->
-            <!-- --- 在此套用新的字體 class --- -->
             <h1 class="text-4xl md:text-5xl font-bold text-sky-400 dark:text-sky-300 font-chenyu">植物養護紀錄</h1>
             <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">記錄每一棵植物的成長，分享專業的養護心得。</p>
         </header>
@@ -117,9 +131,7 @@
             if (plantGrid) {
                 plantGrid.innerHTML = plantData.map(createPlantCardHTML).join('');
             }
-
             const plantCards = document.querySelectorAll('.plant-card');
-
             searchInput.addEventListener('input', (event) => {
                 const searchTerm = event.target.value.toLowerCase().trim();
                 let visibleCount = 0;
@@ -132,7 +144,6 @@
                 noResultsMessage.classList.toggle('hidden', !(visibleCount === 0 && searchTerm.length > 0));
                 if (visibleCount === 0) searchTermDisplay.textContent = event.target.value;
             });
-
             plantGrid.addEventListener('click', (event) => {
                 const card = event.target.closest('.plant-card');
                 if (event.target.closest('a')) return;
@@ -155,19 +166,16 @@
             const ctx = canvas.getContext('2d');
             let particles = [];
             let mouse = { x: null, y: null };
-
             const options = {
                 particleCount: window.innerWidth < 768 ? 80 : 150,
                 connectDistance: 100,
                 mouseDistance: 150,
             };
-
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
                     this.y = Math.random() * canvas.height;
                     this.size = Math.random() * 2 + 0.5;
-                    // V19: 將粒子亮度調整到最高
                     this.color = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.7})`;
                 }
                 draw() {
@@ -177,7 +185,6 @@
                     ctx.fill();
                 }
             }
-
             function setup() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -185,32 +192,21 @@
                 for (let i = 0; i < options.particleCount; i++) {
                     particles.push(new Particle());
                 }
-                draw(); // 初始繪製一次靜態粒子
+                draw();
             }
-
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // 繪製所有靜態粒子
-                for (const p of particles) {
-                    p.draw();
-                }
-
-                // 如果滑鼠在畫布內，則處理互動連線
+                for (const p of particles) { p.draw(); }
                 if (mouse.x) {
                     for (let i = 0; i < particles.length; i++) {
                         const p1 = particles[i];
                         const distToMouse = Math.hypot(p1.x - mouse.x, p1.y - mouse.y);
-
-                        // 如果粒子在滑鼠範圍內，則檢查與其他粒子的連線
                         if (distToMouse < options.mouseDistance) {
                             for (let j = i + 1; j < particles.length; j++) {
                                 const p2 = particles[j];
                                 const distBetweenParticles = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-
                                 if (distBetweenParticles < options.connectDistance) {
                                     ctx.beginPath();
-                                    // V19: 將線條顏色調整為更亮的淡藍色
                                     ctx.strokeStyle = `rgba(224, 242, 254, ${1 - distBetweenParticles / options.connectDistance})`;
                                     ctx.lineWidth = 0.4;
                                     ctx.moveTo(p1.x, p1.y);
@@ -222,21 +218,73 @@
                     }
                 }
             }
-
             window.addEventListener('resize', setup);
             window.addEventListener('mousemove', (event) => {
                 mouse.x = event.x;
                 mouse.y = event.y;
-                requestAnimationFrame(draw); // 只有在滑鼠移動時才觸發重繪
+                requestAnimationFrame(draw);
             });
             window.addEventListener('mouseout', () => {
                 mouse.x = null;
                 mouse.y = null;
-                requestAnimationFrame(draw); // 滑鼠移出時也觸發一次重繪以清除線條
+                requestAnimationFrame(draw);
             });
-
-            // 初始化
             setup();
+        }
+
+        // =================================================================
+        // ===== 3. YouTube 背景音樂控制 =====
+        // =================================================================
+
+        // --- 在這裡貼上您的 YouTube 影片 ID ---
+        // 例如：從 https://www.youtube.com/watch?v=TgOu00Mf3kI 網址中取得 'TgOu00Mf3kI'
+        const YOUTUBE_VIDEO_ID = 'TgOu00Mf3kI';
+
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        let player;
+        let isMuted = true;
+
+        window.onYouTubeIframeAPIReady = function() {
+            player = new YT.Player('youtube-player-container', {
+                height: '315',
+                width: '560',
+                videoId: YOUTUBE_VIDEO_ID,
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'loop': 1,
+                    'playlist': YOUTUBE_VIDEO_ID,
+                    'mute': 1
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+
+        const toggleMusicBtn = document.getElementById('toggle-music-btn');
+        if (toggleMusicBtn) {
+            toggleMusicBtn.addEventListener('click', () => {
+                if (player && typeof player.unMute === 'function') {
+                    if (isMuted) {
+                        player.unMute();
+                        toggleMusicBtn.innerHTML = '<i data-lucide="music-2" class="w-6 h-6"></i>';
+                    } else {
+                        player.mute();
+                        toggleMusicBtn.innerHTML = '<i data-lucide="volume-x" class="w-6 h-6"></i>';
+                    }
+                    isMuted = !isMuted;
+                    lucide.createIcons();
+                }
+            });
         }
     });
     </script>
