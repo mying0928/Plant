@@ -101,21 +101,22 @@
         const noResultsMessage = document.getElementById('noResultsMessage');
         const searchTermDisplay = document.getElementById('searchTermDisplay');
 
-        // --- 函式：根據單一植物資料，產生一張卡片的 HTML (已修正 onerror 錯誤) ---
+        // --- 函式：根據單一植物資料，產生一張卡片的 HTML ---
         function createPlantCardHTML(plant) {
+            // 新增 cursor-pointer 讓滑鼠移上有手形指標
             return `
-                <div class="plant-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/40 dark:hover:shadow-green-400/30">
-                    <div class="relative">
+                <div class="plant-card cursor-pointer bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/40 dark:hover:shadow-green-400/30">
+                    <div class="relative pointer-events-none">
                         <img class="w-full h-56 object-cover object-center"
                              src="${plant.imageUrl}"
                              alt="${plant.altText}"
                              onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');">
                         <div class="w-full h-56 image-placeholder hidden">${plant.name}</div>
                     </div>
-                    <div class="p-6">
+                    <div class="p-6 pointer-events-none">
                         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${plant.name}</h2>
                         <p class="text-gray-600 dark:text-gray-400 mb-4">${plant.description}</p>
-                        <a href="${plant.linkUrl}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+                        <a href="${plant.linkUrl}" class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 pointer-events-auto">
                             查看養護紀錄
                         </a>
                     </div>
@@ -133,7 +134,7 @@
         renderCards(plantData);
 
         // --- 搜尋功能：在卡片渲染後才綁定事件 ---
-        const plantCards = document.querySelectorAll('.plant-card'); // 重新選取動態產生的卡片
+        const plantCards = document.querySelectorAll('.plant-card'); 
 
         searchInput.addEventListener('input', function(event) {
             const rawSearchTerm = event.target.value;
@@ -159,12 +160,40 @@
                 }
             });
 
-            // 根據可見卡片數量，決定是否顯示「找不到結果」的訊息
             if (visibleCount === 0 && searchTerm.length > 0) {
                 searchTermDisplay.textContent = rawSearchTerm;
                 noResultsMessage.classList.remove('hidden');
             } else {
                 noResultsMessage.classList.add('hidden');
+            }
+        });
+
+        // =================================================================
+        // ===== 3. 新增功能：讓整張卡片都可以點擊 (已修正錯誤) =====
+        // =================================================================
+        plantGrid.addEventListener('click', function(event) {
+            const card = event.target.closest('.plant-card');
+            
+            // 如果點擊的目標是按鈕本身，讓瀏覽器正常處理連結
+            if (event.target.closest('a')) {
+                return;
+            }
+
+            // 如果點擊的是卡片的其他區域，就找到卡片內的連結並觸發跳轉
+            if (card) {
+                const link = card.querySelector('a');
+                if (link) {
+                    const relativeUrl = link.getAttribute('href');
+                    if (relativeUrl) {
+                        try {
+                            // 將相對路徑轉換為絕對 URL
+                            const absoluteUrl = new URL(relativeUrl, window.location.href).href;
+                            window.location.href = absoluteUrl;
+                        } catch (e) {
+                            console.error("無法建立有效的 URL:", relativeUrl, e);
+                        }
+                    }
+                }
             }
         });
 
