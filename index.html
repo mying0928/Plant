@@ -9,12 +9,20 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- V19: 換回預設字體 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
 
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        /* --- 新增的 @font-face 規則 --- */
+        @font-face {
+            font-family: 'ChenYuluoyan'; /* 自訂字體名稱 */
+            /* 根據您提供的路徑 */
+            src: url('./Plant/fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             font-family: 'Inter', 'Noto Sans TC', sans-serif;
             -webkit-font-smoothing: antialiased;
@@ -28,7 +36,6 @@
             color: #4a5568;
             font-weight: 500;
         }
-        /* V19: 使用漸層星空背景 */
         body.dark {
             background-color: #0d1120; /* 後備顏色 */
             background-image: linear-gradient(160deg, #191e3e 0%, #0d1120 100%);
@@ -42,17 +49,22 @@
             height: 100%;
             z-index: -1;
         }
+        /* --- 新增的字體樣式 class --- */
+        .font-chenyu {
+            font-family: 'ChenYuluoyan', 'Noto Sans TC', sans-serif; /* 將辰宇落雁體設為優先，並保留備用字體 */
+        }
     </style>
 </head>
 <body class="bg-gray-100 dark text-gray-800 dark:text-gray-200">
-    
+
     <canvas id="particle-canvas"></canvas>
 
     <div class="container mx-auto px-4 py-8 md:py-16 relative z-10">
 
         <header class="text-center mb-8">
             <!-- V19: 恢復預設字體與大小 -->
-            <h1 class="text-4xl md:text-5xl font-bold text-sky-400 dark:text-sky-300">植物養護紀錄</h1>
+            <!-- --- 在此套用新的字體 class --- -->
+            <h1 class="text-4xl md:text-5xl font-bold text-sky-400 dark:text-sky-300 font-chenyu">植物養護紀錄</h1>
             <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">記錄每一棵植物的成長，分享專業的養護心得。</p>
         </header>
 
@@ -91,7 +103,7 @@
             { name: 'Colocasia Thunderstorm', description: '引人注目的觀葉植物，以其深色、幾乎黑色的葉子和鮮明的葉脈而聞名。', imageUrl: 'https://fuzzyroots.co.za/cdn/shop/products/3-8.png?v=1707072745', altText: 'Colocasia Thunderstorm 植物', linkUrl: './Colocasia_Thunderstorm/index.html' },
             { name: '龜背芋 (Monstera)', description: '標誌性的大片裂葉，是室內綠化的熱門選擇，能為空間帶來熱帶風情。', imageUrl: 'https://chensplant.com/wp-content/uploads/2024/10/2421.jpg', altText: '龜背芋 (Monstera Deliciosa) 植物', linkUrl: './Monstera_Deliciosa/index.html' }
         ];
-        
+
         const plantGrid = document.getElementById('plantGrid');
         const searchInput = document.getElementById('searchInput');
         const noResultsMessage = document.getElementById('noResultsMessage');
@@ -105,7 +117,7 @@
             if (plantGrid) {
                 plantGrid.innerHTML = plantData.map(createPlantCardHTML).join('');
             }
-            
+
             const plantCards = document.querySelectorAll('.plant-card');
 
             searchInput.addEventListener('input', (event) => {
@@ -130,11 +142,11 @@
                 }
             });
         }
-        
+
         renderContent();
         document.getElementById('year').textContent = new Date().getFullYear();
         lucide.createIcons();
-        
+
         // =================================================================
         // ===== 2. 靜態粒子 + 滑鼠互動效果 =====
         // =================================================================
@@ -143,7 +155,7 @@
             const ctx = canvas.getContext('2d');
             let particles = [];
             let mouse = { x: null, y: null };
-            
+
             const options = {
                 particleCount: window.innerWidth < 768 ? 80 : 150,
                 connectDistance: 100,
@@ -178,7 +190,7 @@
 
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                
+
                 // 繪製所有靜態粒子
                 for (const p of particles) {
                     p.draw();
@@ -212,13 +224,13 @@
             }
 
             window.addEventListener('resize', setup);
-            window.addEventListener('mousemove', (event) => { 
-                mouse.x = event.x; 
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.x;
                 mouse.y = event.y;
                 requestAnimationFrame(draw); // 只有在滑鼠移動時才觸發重繪
             });
-            window.addEventListener('mouseout', () => { 
-                mouse.x = null; 
+            window.addEventListener('mouseout', () => {
+                mouse.x = null;
                 mouse.y = null;
                 requestAnimationFrame(draw); // 滑鼠移出時也觸發一次重繪以清除線條
             });
