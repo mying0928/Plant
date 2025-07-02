@@ -12,6 +12,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- 引入 Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         /* 使用 Noto Sans TC 作為主要字體，英文則使用 Inter */
@@ -37,34 +40,63 @@
     <div class="container mx-auto px-4 py-8 md:py-16">
 
         <!-- 頁首標題 -->
-        <header class="text-center mb-12">
+        <header class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-green-600 dark:text-green-400">植物養護紀錄</h1>
             <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">記錄每一棵植物的成長，分享專業的養護心得。</p>
         </header>
 
-        <!-- 植物卡片網格 -->
+        <!-- 搜尋框 -->
+        <div class="mb-12 max-w-2xl mx-auto">
+            <div class="relative">
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                    <i data-lucide="search" class="w-5 h-5 text-gray-400"></i>
+                </span>
+                <input type="text" id="searchInput" placeholder="搜尋植物名稱..." class="w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-full bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-green-500">
+            </div>
+        </div>
+
+        <!-- 植物卡片網格與結果顯示區 -->
         <main>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+            <div id="plantGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
 
                 <!-- ===== 卡片 1: Colocasia Thunderstorm ===== -->
-                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/40 dark:hover:shadow-green-400/30">
+                <div class="plant-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/40 dark:hover:shadow-green-400/30">
                     <img class="w-full h-56 object-cover object-center"
                          src="https://fuzzyroots.co.za/cdn/shop/products/3-8.png?v=1707072745"
                          alt="Colocasia Thunderstorm 植物"
                          onerror="this.onerror=null; this.parentElement.innerHTML = '<div class=\'w-full h-56 image-placeholder\'>Colocasia Thunderstorm</div>';">
-
                     <div class="p-6">
                         <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Colocasia Thunderstorm</h2>
-                        <p class="text-gray-600 dark:text-gray-400 mb-4">這是一種引人注目的觀葉植物，以其深色、幾乎黑色的葉子和鮮明的葉脈而聞名。</p>
-                        <a href="./plant/index.html" class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">引人注目的觀葉植物，以其深色、幾乎黑色的葉子和鮮明的葉脈而聞名。</p>
+                        <a href="./Colocasia_Thunderstorm/index.html" class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
                             查看養護紀錄
                         </a>
                     </div>
                 </div>
-                <!-- ===== 卡片 1 結束 ===== -->
 
+                <!-- ===== 卡片 2: Monstera Deliciosa (龜背芋) ===== -->
+                <div class="plant-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/40 dark:hover:shadow-green-400/30">
+                    <img class="w-full h-56 object-cover object-center"
+                         src="https://chensplant.com/wp-content/uploads/2024/10/2421.jpg"
+                         alt="龜背芋 (Monstera Deliciosa) 植物"
+                         onerror="this.onerror=null; this.parentElement.innerHTML = '<div class=\'w-full h-56 image-placeholder\'>龜背芋</div>';">
+                    <div class="p-6">
+                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">龜背芋 (Monstera)</h2>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4">標誌性的大片裂葉，是室內綠化的熱門選擇，能為空間帶來熱帶風情。</p>
+                        <a href="./Monstera_Deliciosa/index.html" class="inline-block bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300">
+                            查看養護紀錄
+                        </a>
+                    </div>
+                </div>
+                
                 <!-- 您可以在此處添加更多植物卡片 -->
 
+            </div>
+            
+            <!-- 找不到結果時的提示訊息 -->
+            <div id="noResultsMessage" class="text-center text-gray-500 dark:text-gray-400 py-10 hidden">
+                <h3 class="text-2xl font-semibold">找不到結果</h3>
+                <p class="mt-2">抱歉，沒有找到符合「<span id="searchTermDisplay" class="font-semibold text-gray-700 dark:text-gray-300"></span>」的植物。</p>
             </div>
         </main>
 
@@ -76,8 +108,52 @@
     </div>
 
     <script>
-        // 自動更新頁尾的年份
+        // --- 搜尋功能腳本 ---
+        document.addEventListener('DOMContentLoaded', function () {
+            const searchInput = document.getElementById('searchInput');
+            const plantCards = document.querySelectorAll('.plant-card');
+            const noResultsMessage = document.getElementById('noResultsMessage');
+            const searchTermDisplay = document.getElementById('searchTermDisplay');
+
+            searchInput.addEventListener('input', function(event) {
+                const rawSearchTerm = event.target.value;
+                const searchTerm = rawSearchTerm.toLowerCase().trim();
+                let visibleCount = 0;
+
+                plantCards.forEach(card => {
+                    const plantNameElement = card.querySelector('h2');
+                    let isVisible = false;
+
+                    if (plantNameElement) {
+                        const plantName = plantNameElement.textContent.toLowerCase();
+                        if (searchTerm === "" || plantName.includes(searchTerm)) {
+                            isVisible = true;
+                        }
+                    }
+                    
+                    if (isVisible) {
+                        card.classList.remove('hidden');
+                        card.style.display = ''; 
+                        visibleCount++;
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+
+                if (visibleCount === 0 && searchTerm.length > 0) {
+                    searchTermDisplay.textContent = rawSearchTerm;
+                    noResultsMessage.classList.remove('hidden');
+                } else {
+                    noResultsMessage.classList.add('hidden');
+                }
+            });
+        });
+
+        // --- 自動更新頁尾年份 ---
         document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // --- 啟用 Lucide Icons ---
+        lucide.createIcons();
     </script>
 
 </body>
