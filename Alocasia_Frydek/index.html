@@ -15,7 +15,7 @@
       1. Hero Section: Introduces the Alocasia 'Frydek' as a luxury plant, drawing from the research.
       2. Interactive Pot Selector: A dynamic tool based on the research's pot analysis, helping users choose pots for photography and sales.
       3. Regional Cultivation Guide: The core of the user's request. It uses four Chart.js doughnut charts to visualize the specific soil recipes for Northern, Central, Southern, and Eastern Taiwan, making the complex data from the report easy to understand.
-      4. Plant Profile: Highlights 'Frydek's' key selling points (velvet leaves, rhizomes, etc.).
+      4. Plant Profile: Highlights 'Frydek's' key selling points (velvet leaves, rhizomes, etc.), including updated lighting requirements.
       This structure prioritizes user engagement and practical application of the provided research data.
     -->
     <!-- 
@@ -25,25 +25,26 @@
       3. Report Info: Alocasia's key traits -> Goal: Inform -> Viz/Method: Styled HTML cards with icons. Interaction: Static display for quick reference. Justification: Clear, scannable presentation. Library: Tailwind CSS.
     -->
     <style>
+        /* Updated color scheme for a dark, elegant theme */
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #F5F5F4; /* stone-100 */
-            color: #262626; /* neutral-800 */
+            background-color: #1c1917; /* stone-900 */
+            color: #e7e5e4; /* stone-200 */
         }
         .active-nav {
-            color: #047857; /* emerald-700 */
+            color: #34d399; /* emerald-400 */
             font-weight: 700;
         }
         .inactive-nav {
-            color: #525252; /* neutral-600 */
+            color: #a8a29e; /* stone-400 */
         }
         .active-tab {
-            background-color: #1a2e27; /* Dark Green-Black */
-            color: #f5f5f4;
+            background-color: #059669; /* emerald-600 */
+            color: #ffffff;
         }
         .inactive-tab {
-            background-color: #e5e5e5; /* neutral-200 */
-            color: #525252; /* neutral-600 */
+            background-color: #44403c; /* stone-700 */
+            color: #d6d3d1; /* stone-300 */
         }
         .chart-container {
             position: relative;
@@ -57,19 +58,19 @@
 <body class="antialiased">
 
     <!-- Header & Navigation -->
-    <header class="bg-stone-50/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <header class="bg-stone-800/80 backdrop-blur-md sticky top-0 z-50 shadow-lg shadow-black/20">
         <div class="container mx-auto px-4">
             <nav class="flex justify-between items-center py-4">
-                <h1 class="text-xl md:text-2xl font-bold text-neutral-800">
-                    <span class="text-emerald-700">絨葉觀音蓮</span>商業聖經
+                <h1 class="text-xl md:text-2xl font-bold text-stone-100">
+                    <span class="text-emerald-400">絨葉觀音蓮</span>商業聖經
                 </h1>
                 <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg items-center">
-                    <a href="#phenomenon" class="inactive-nav hover:text-emerald-600 transition-colors duration-300">明星植物</a>
-                    <a href="#selector" class="inactive-nav hover:text-emerald-600 transition-colors duration-300">盆器風格</a>
-                    <a href="#cultivation" class="inactive-nav hover:text-emerald-600 transition-colors duration-300">介質指南</a>
-                    <a href="#profile" class="inactive-nav hover:text-emerald-600 transition-colors duration-300">植株檔案</a>
+                    <a href="#phenomenon" class="inactive-nav hover:text-emerald-400 transition-colors duration-300">明星植物</a>
+                    <a href="#selector" class="inactive-nav hover:text-emerald-400 transition-colors duration-300">盆器風格</a>
+                    <a href="#cultivation" class="inactive-nav hover:text-emerald-400 transition-colors duration-300">介質指南</a>
+                    <a href="#profile" class="inactive-nav hover:text-emerald-400 transition-colors duration-300">植株檔案</a>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-neutral-700 hover:bg-neutral-200 focus:outline-none">
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-stone-300 hover:bg-stone-700 focus:outline-none">
                     <span class="block w-6 h-0.5 bg-current"></span>
                     <span class="block w-6 h-0.5 bg-current mt-1.5"></span>
                     <span class="block w-6 h-0.5 bg-current mt-1.5"></span>
@@ -77,7 +78,7 @@
             </nav>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2">
+        <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2 bg-stone-800 border-t border-stone-700">
             <a href="#phenomenon" class="block py-2 inactive-nav">明星植物</a>
             <a href="#selector" class="block py-2 inactive-nav">盆器風格</a>
             <a href="#cultivation" class="block py-2 inactive-nav">介質指南</a>
@@ -90,23 +91,23 @@
         <!-- Section 1: The Frydek Phenomenon -->
         <section id="phenomenon" class="mb-16 scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mb-4">明星植物：解構絨葉觀音蓮的奢華密碼</h2>
-                <p class="max-w-3xl mx-auto text-lg text-neutral-600">絨葉觀音蓮不僅是植物，它是一種奢華的視覺宣言。其天鵝絨般的葉片與醒目的白色葉脈，使其成為高端室內綠化的寵兒，這正是其商業價值的核心。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">明星植物：解構絨葉觀音蓮的奢華密碼</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-300">絨葉觀音蓮不僅是植物，它是一種奢華的視覺宣言。其天鵝絨般的葉片與醒目的白色葉脈，使其成為高端室內綠化的寵兒，這正是其商業價值的核心。</p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-neutral-200">
-                    <h3 class="font-bold text-xl mb-3 text-emerald-700 flex items-center">
+                <div class="bg-stone-800 p-6 rounded-xl shadow-lg border border-stone-700">
+                    <h3 class="font-bold text-xl mb-3 text-emerald-400 flex items-center">
                         <span class="text-2xl mr-2">💎</span>視覺價值
                     </h3>
-                    <p class="text-neutral-700">深邃如絲絨的葉面與清晰的葉脈，創造出無可比擬的視覺對比與高級感。成功的商業模式，在於將其獨特美學與精準的養護策略結合，創造出完美的產品。</p>
+                    <p class="text-stone-300">深邃如絲絨的葉面與清晰的葉脈，創造出無可比擬的視覺對比與高級感。成功的商業模式，在於將其獨特美學與精準的養護策略結合，創造出完美的產品。</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-neutral-200">
-                    <h3 class="font-bold text-xl mb-3 text-teal-700 flex items-center">
+                <div class="bg-stone-800 p-6 rounded-xl shadow-lg border border-stone-700">
+                    <h3 class="font-bold text-xl mb-3 text-teal-400 flex items-center">
                         <span class="text-2xl mr-2">🎯</span>商業策略
                     </h3>
-                    <p class="text-neutral-700">本指南將盆器、介質與植株視為一個不可分割的整體系統。我們的目標是打造出健康、絕美且具備高溢價能力的絨葉觀音蓮，贏得高端市場的青睞。</p>
+                    <p class="text-stone-300">本指南將盆器、介質與植株視為一個不可分割的整體系統。我們的目標是打造出健康、絕美且具備高溢價能力的絨葉觀音蓮，贏得高端市場的青睞。</p>
                 </div>
             </div>
         </section>
@@ -114,8 +115,8 @@
         <!-- Section 2: Pot Selector -->
         <section id="selector" class="mb-16 scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mb-4">盆器風格：互動攝影指南</h2>
-                <p class="max-w-3xl mx-auto text-lg text-neutral-600">盆器是風格的延伸，直接影響攝影效果與產品價值。點擊下方不同的風格定位，探索最適合您商業攝影與銷售的策略。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">盆器風格：互動攝影指南</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-300">盆器是風格的延伸，直接影響攝影效果與產品價值。點擊下方不同的風格定位，探索最適合您商業攝影與銷售的策略。</p>
             </div>
 
             <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
@@ -125,7 +126,7 @@
                 <button data-style="system" class="pot-style-btn px-4 py-2 rounded-full font-semibold transition-all duration-300 ease-in-out shadow-sm inactive-tab">雙盆系統</button>
             </div>
 
-            <div id="pot-display" class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-neutral-200 transition-opacity duration-500">
+            <div id="pot-display" class="bg-stone-800 rounded-xl shadow-lg p-6 md:p-8 border border-stone-700 transition-opacity duration-500">
                 <!-- Content will be dynamically inserted here by JavaScript -->
             </div>
         </section>
@@ -133,35 +134,35 @@
         <!-- Section 3: Cultivation Guide -->
         <section id="cultivation" class="mb-16 scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mb-4">台灣分區介質指南</h2>
-                <p class="max-w-3xl mx-auto text-lg text-neutral-600">健康的根莖是植株價值的基石。針對台灣各區氣候的挑戰，我們提供精準的介質配方，從根本上預防爛根，確保您的植物展現最佳狀態。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">台灣分區介質指南</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-300">健康的根莖是植株價值的基石。針對台灣各區氣候的挑戰，我們提供精準的介質配方，從根本上預防爛根，確保您的植物展現最佳狀態。</p>
             </div>
 
-            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-neutral-200">
+            <div class="bg-stone-800 rounded-xl shadow-lg p-6 md:p-8 border border-stone-700">
                 <div class="mb-8">
-                     <h3 class="font-bold text-2xl text-center mb-4 text-neutral-700">介質的科學：戰勝頭號殺手「爛根」</h3>
-                     <p class="text-center max-w-2xl mx-auto text-neutral-600">絨葉觀音蓮的肉質根莖極度害怕積水。理想介質的核心目標只有一個：<strong class="text-emerald-700">創造卓越的透氣性與排水性</strong>，模擬其在雨林中附著生長的環境，避免盆土長期濕潤導致的致命腐爛。</p>
+                     <h3 class="font-bold text-2xl text-center mb-4 text-stone-100">介質的科學：戰勝頭號殺手「爛根」</h3>
+                     <p class="text-center max-w-2xl mx-auto text-stone-300">絨葉觀音蓮的肉質根莖極度害怕積水。理想介質的核心目標只有一個：<strong class="text-emerald-400">創造卓越的透氣性與排水性</strong>，模擬其在雨林中附著生長的環境，避免盆土長期濕潤導致的致命腐爛。</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="text-center">
-                        <h4 class="font-bold text-xl mb-2">北部配方</h4>
-                        <p class="text-sm text-neutral-500 mb-4 h-12">針對冬季濕冷，最大化通氣性，主動防禦休眠期爛根。</p>
+                        <h4 class="font-bold text-xl mb-2 text-stone-100">北部配方</h4>
+                        <p class="text-sm text-stone-400 mb-4 h-12">針對冬季濕冷，最大化通氣性，主動防禦休眠期爛根。</p>
                         <div class="chart-container"><canvas id="northChart"></canvas></div>
                     </div>
                     <div class="text-center">
-                        <h4 class="font-bold text-xl mb-2">中部配方</h4>
-                        <p class="text-sm text-neutral-500 mb-4 h-12">均衡配方，應對夏季濕熱與相對乾燥的冬季，攻守兼備。</p>
+                        <h4 class="font-bold text-xl mb-2 text-stone-100">中部配方</h4>
+                        <p class="text-sm text-stone-400 mb-4 h-12">均衡配方，應對夏季濕熱與相對乾燥的冬季，攻守兼備。</p>
                         <div class="chart-container"><canvas id="centralChart"></canvas></div>
                     </div>
                      <div class="text-center">
-                        <h4 class="font-bold text-xl mb-2">南部配方</h4>
-                        <p class="text-sm text-neutral-500 mb-4 h-12">應對乾濕矛盾，夏季極速排水，乾季又能藉由椰塊保水。</p>
+                        <h4 class="font-bold text-xl mb-2 text-stone-100">南部配方</h4>
+                        <p class="text-sm text-stone-400 mb-4 h-12">應對乾濕矛盾，夏季極速排水，乾季又能藉由椰塊保水。</p>
                         <div class="chart-container"><canvas id="southChart"></canvas></div>
                     </div>
                     <div class="text-center">
-                        <h4 class="font-bold text-xl mb-2">東部配方</h4>
-                        <p class="text-sm text-neutral-500 mb-4 h-12">極致排水並增加重量，抵抗颱風季節的強風與暴雨。</p>
+                        <h4 class="font-bold text-xl mb-2 text-stone-100">東部配方</h4>
+                        <p class="text-sm text-stone-400 mb-4 h-12">極致排水並增加重量，抵抗颱風季節的強風與暴雨。</p>
                         <div class="chart-container"><canvas id="eastChart"></canvas></div>
                     </div>
                 </div>
@@ -171,36 +172,36 @@
         <!-- Section 4: Plant Profile -->
         <section id="profile" class="scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mb-4">植株速覽檔案</h2>
-                <p class="max-w-3xl mx-auto text-lg text-neutral-600">快速掌握絨葉觀音蓮的核心美學與商業賣點。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-100 mb-4">植株速覽檔案</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-300">快速掌握絨葉觀音蓮的核心美學與商業賣點。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-neutral-200 text-center">
+                <div class="bg-stone-800 p-6 rounded-xl shadow-lg border border-stone-700 text-center">
                     <div class="text-4xl mb-3">💎</div>
-                    <h3 class="text-xl font-bold mb-2">天鵝絨葉</h3>
-                    <p class="text-neutral-600">深邃的墨綠色絨布質感，搭配亮白色葉脈，是其最高級的視覺特徵。</p>
+                    <h3 class="text-xl font-bold mb-2 text-stone-100">天鵝絨葉</h3>
+                    <p class="text-stone-300">深邃的墨綠色絨布質感，搭配亮白色葉脈，是其最高級的視覺特徵。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-neutral-200 text-center">
+                <div class="bg-stone-800 p-6 rounded-xl shadow-lg border border-stone-700 text-center">
                     <div class="text-4xl mb-3">🏹</div>
-                    <h3 class="text-xl font-bold mb-2">挺拔箭形</h3>
-                    <p class="text-neutral-600">直立的生長習性與長箭形葉片，賦予植株雕塑般的建築美感。</p>
+                    <h3 class="text-xl font-bold mb-2 text-stone-100">挺拔箭形</h3>
+                    <p class="text-stone-300">直立的生長習性與長箭形葉片，賦予植株雕塑般的建築美感。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-neutral-200 text-center">
+                <div class="bg-stone-800 p-6 rounded-xl shadow-lg border border-stone-700 text-center">
                     <div class="text-4xl mb-3">🥔</div>
-                    <h3 class="text-xl font-bold mb-2">地下根莖</h3>
-                    <p class="text-neutral-600">儲存養分的肉質根莖是其生命核心，但也極易腐爛，需要極佳的排水。</p>
+                    <h3 class="text-xl font-bold mb-2 text-stone-100">地下根莖</h3>
+                    <p class="text-stone-300">儲存養分的肉質根莖是其生命核心，但也極易腐爛，需要極佳的排水。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-neutral-200 text-center">
-                    <div class="text-4xl mb-3">💧</div>
-                    <h3 class="text-xl font-bold mb-2">高濕度需求</h3>
-                    <p class="text-neutral-600">源自雨林底層，偏好70-80%的高空氣濕度，避免葉緣焦枯是養護關鍵。</p>
+                <div class="bg-stone-800 p-6 rounded-xl shadow-lg border border-stone-700 text-center">
+                    <div class="text-4xl mb-3">☀️</div>
+                    <h3 class="text-xl font-bold mb-2 text-stone-100">光照需求</h3>
+                    <p class="text-stone-300">偏好每日 4-6 小時的明亮散射光。避免葉片被強烈直射陽光灼傷，是維持其美麗外觀的關鍵。</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-neutral-800 text-neutral-300 mt-16">
+    <footer class="bg-stone-900 text-stone-400 mt-16 border-t border-stone-800">
         <div class="container mx-auto px-4 py-6 text-center">
             <p>互動式絨葉觀音蓮商業指南 | 為商業成功而生</p>
         </div>
@@ -256,17 +257,17 @@
                 potDisplay.style.opacity = 0;
                 setTimeout(() => {
                     potDisplay.innerHTML = `
-                        <h3 class="text-2xl font-bold mb-4 text-neutral-800">${data.title}</h3>
+                        <h3 class="text-2xl font-bold mb-4 text-stone-100">${data.title}</h3>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <h4 class="font-semibold text-lg mb-2 text-neutral-700">推薦材質</h4>
-                                <p class="text-neutral-600 mb-4">${data.materials}</p>
-                                <h4 class="font-semibold text-lg mb-2 text-neutral-700">風格理念</h4>
-                                <p class="text-neutral-600">${data.philosophy}</p>
+                                <h4 class="font-semibold text-lg mb-2 text-stone-200">推薦材質</h4>
+                                <p class="text-stone-300 mb-4">${data.materials}</p>
+                                <h4 class="font-semibold text-lg mb-2 text-stone-200">風格理念</h4>
+                                <p class="text-stone-300">${data.philosophy}</p>
                             </div>
-                            <div class="bg-neutral-100 p-4 rounded-lg">
-                                <h4 class="font-semibold text-lg mb-2 text-emerald-700">攝影目標</h4>
-                                <p class="text-neutral-600">${data.photoGoal}</p>
+                            <div class="bg-stone-900 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2 text-emerald-400">攝影目標</h4>
+                                <p class="text-stone-300">${data.photoGoal}</p>
                             </div>
                         </div>
                     `;
@@ -300,7 +301,8 @@
                         labels: {
                             font: { size: 11 },
                             padding: 10,
-                            boxWidth: 12
+                            boxWidth: 12,
+                            color: '#a8a29e' // stone-400
                         }
                     },
                     tooltip: {
@@ -316,8 +318,9 @@
                 },
                 cutout: '60%'
             };
-
-            const chartColors = ['#7f5539', '#a68a64', '#c4a385', '#e6ccb2', '#582f0e'].reverse();
+            
+            // New color palette for charts on dark background
+            const chartColors = ['#059669', '#10B981', '#34D399', '#6EE7B7', '#A7F3D0'];
 
             // Northern Taiwan Mix: "冬季防禦"高透氣配方
             new Chart(document.getElementById('northChart'), {
@@ -328,7 +331,7 @@
                         label: '北部配方 (份)',
                         data: [2, 2, 1, 0.5],
                         backgroundColor: chartColors,
-                        borderColor: '#F5F5F4',
+                        borderColor: '#292524', // stone-800
                         borderWidth: 3
                     }]
                 },
@@ -344,7 +347,7 @@
                         label: '中部配方 (份)',
                         data: [1.5, 1.5, 1.5, 1],
                         backgroundColor: chartColors,
-                        borderColor: '#F5F5F4',
+                        borderColor: '#292524',
                         borderWidth: 3
                     }]
                 },
@@ -360,7 +363,7 @@
                         label: '南部配方 (份)',
                         data: [2, 2, 1, 1],
                         backgroundColor: chartColors,
-                        borderColor: '#F5F5F4',
+                        borderColor: '#292524',
                         borderWidth: 3
                     }]
                 },
@@ -376,7 +379,7 @@
                         label: '東部配方 (份)',
                         data: [3, 2, 1],
                         backgroundColor: chartColors.slice(0, 3),
-                        borderColor: '#F5F5F4',
+                        borderColor: '#292524',
                         borderWidth: 3
                     }]
                 },
@@ -409,4 +412,3 @@
     </script>
 </body>
 </html>
-
