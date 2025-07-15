@@ -189,14 +189,15 @@
             }
         ];
 
+        // --- 新增：根據植物名稱自動排序資料 ---
+        plantData.sort((a, b) => a.name.localeCompare(b.name, 'zh-Hant'));
+
         const plantGrid = document.getElementById('plantGrid');
         const searchInput = document.getElementById('searchInput');
         const noResultsMessage = document.getElementById('noResultsMessage');
         const searchTermDisplay = document.getElementById('searchTermDisplay');
 
         function createPlantCardHTML(plant) {
-            // --- FIX: Escaped single quotes in the plant name for the onerror attribute ---
-            // This prevents a JavaScript syntax error when a plant name contains a single quote.
             const safePlantName = plant.name.replace(/'/g, "\\'");
             const placeholderHTML = `<div class='w-full h-56 image-placeholder'>${safePlantName}</div>`;
             
@@ -237,12 +238,10 @@
             });
 
             plantGrid.addEventListener('click', (event) => {
-                // Allow clicking the link directly
                 if (event.target.closest('a')) {
                     return;
                 }
                 
-                // Otherwise, clicking anywhere on the card navigates
                 const card = event.target.closest('.plant-card');
                 if (card) {
                     const link = card.querySelector('a');
@@ -342,15 +341,12 @@
             window.addEventListener('mouseout', handleMouseOut);
             
             setup();
-            // Static draw, only animate on mouse move for performance
-            // If you want constant movement, call animate() here.
         }
 
         // =================================================================
         // ===== 3. YouTube 背景音樂控制 =====
         // =================================================================
 
-        // --- 在這裡貼上您的 YouTube 影片 ID ---
         const YOUTUBE_VIDEO_ID = 'TgOu00Mf3kI';
 
         const tag = document.createElement('script');
