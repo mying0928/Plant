@@ -9,28 +9,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Palette Choice: Serene Blue & Earth Tones -->
-    <!-- Rationale: The original fuchsia was great for the exotic Colocasia, but for the Juniper, a palette of serene blues, greys, and earthy tones better reflects its calm, resilient, and timeless character. The blue accent (#2563EB) is chosen to complement the juniper's silvery-blue foliage. -->
+    <!-- Palette Update: Earth & Forest Tones -->
+    <!-- Rationale: Switched from the previous blue/gray to a more grounded, natural palette. A deep forest green (#14532d) is now the primary accent, reflecting the plant's woody nature. This is paired with warm stone/beige tones for the background and text, creating a serene, earthy, and sophisticated feel suitable for bonsai and landscape themes. -->
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #F3F4F6; /* gray-100 */
-            color: #1F2937; /* gray-800 */
+            background-color: #F5F5F4; /* stone-100 */
+            color: #292524; /* stone-800 */
         }
         .active-nav {
-            color: #2563EB; /* blue-600 */
+            color: #14532d; /* green-900 */
             font-weight: 700;
         }
         .inactive-nav {
-            color: #4B5563; /* gray-600 */
+            color: #57534e; /* stone-600 */
         }
         .active-tab {
-            background-color: #3B82F6; /* blue-500 */
+            background-color: #166534; /* green-800 */
             color: #FFFFFF;
         }
         .inactive-tab {
-            background-color: #E5E7EB; /* gray-200 */
-            color: #374151; /* gray-700 */
+            background-color: #E7E5E4; /* stone-200 */
+            color: #44403C; /* stone-700 */
         }
         .chart-container {
             position: relative;
@@ -44,19 +44,19 @@
 <body class="antialiased">
 
     <!-- Header & Navigation -->
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <header class="bg-stone-50/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div class="container mx-auto px-4">
             <nav class="flex justify-between items-center py-4">
-                <h1 class="text-xl md:text-2xl font-bold text-gray-800">
-                    <span class="text-blue-600">銀柏</span>風格指南
+                <h1 class="text-xl md:text-2xl font-bold text-stone-800">
+                    <span class="text-green-800">銀柏</span>風格指南
                 </h1>
                 <div class="hidden md:flex space-x-6 lg:space-x-8 text-lg items-center">
-                    <a href="#identity" class="inactive-nav hover:text-blue-600 transition-colors duration-300">風格之源</a>
-                    <a href="#selector" class="inactive-nav hover:text-blue-600 transition-colors duration-300">盆器定位</a>
-                    <a href="#cultivation" class="inactive-nav hover:text-blue-600 transition-colors duration-300">在地栽培</a>
-                    <a href="#profile" class="inactive-nav hover:text-blue-600 transition-colors duration-300">植物檔案</a>
+                    <a href="#identity" class="inactive-nav hover:text-green-800 transition-colors duration-300">主角介紹</a>
+                    <a href="#selector" class="inactive-nav hover:text-green-800 transition-colors duration-300">盆器定位</a>
+                    <a href="#cultivation" class="inactive-nav hover:text-green-800 transition-colors duration-300">在地栽培</a>
+                    <a href="#profile" class="inactive-nav hover:text-green-800 transition-colors duration-300">養護檔案</a>
                 </div>
-                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-gray-700 hover:bg-gray-200 focus:outline-none">
+                <button id="mobile-menu-button" class="md:hidden p-2 rounded-md text-stone-700 hover:bg-stone-200 focus:outline-none">
                     <span class="block w-6 h-0.5 bg-current"></span>
                     <span class="block w-6 h-0.5 bg-current mt-1.5"></span>
                     <span class="block w-6 h-0.5 bg-current mt-1.5"></span>
@@ -65,35 +65,39 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden px-4 pt-2 pb-4 space-y-2">
-            <a href="#identity" class="block py-2 inactive-nav">風格之源</a>
+            <a href="#identity" class="block py-2 inactive-nav">主角介紹</a>
             <a href="#selector" class="block py-2 inactive-nav">盆器定位</a>
             <a href="#cultivation" class="block py-2 inactive-nav">在地栽培</a>
-            <a href="#profile" class="block py-2 inactive-nav">植物檔案</a>
+            <a href="#profile" class="block py-2 inactive-nav">養護檔案</a>
         </div>
     </header>
 
     <main class="container mx-auto px-4 py-8 md:py-12">
 
-        <!-- Section 1: Identity -->
+        <!-- Section 1: Identity (Updated Name) -->
         <section id="identity" class="mb-16 scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">風格之源：從庭園到盆景</h2>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600">銀柏的美，在於其多變的可塑性。它既是廣闊庭園中的堅毅地景，也是方寸盆中的微縮自然。理解其雙重身份，是為它選擇完美歸宿的第一步。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-4">
+                    主角介紹：銀柏 (Pfitzeriana Glauca)
+                </h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-600">
+                    學名為 <code class="text-sm bg-stone-200 px-2 py-1 rounded-md">Juniperus chinensis 'Pfitzeriana Glauca'</code>，以其獨特的<strong class="text-green-800">銀藍色針葉</strong>與<strong class="text-green-800">優雅的拱形枝條</strong>聞名。它的枝葉如噴泉般自然伸展，無論是作為雕塑感的庭園地景，還是化身為方寸之間的盆景藝術，都展現出寧靜堅毅的生命力，為空間注入一抹冷冽高雅的色彩。
+                </p>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                    <h3 class="font-bold text-xl mb-3 text-gray-800 flex items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200">
+                    <h3 class="font-bold text-xl mb-3 text-stone-800 flex items-center">
                         <span class="text-2xl mr-2">🌳</span>庭園中的雕塑
                     </h3>
-                    <p class="text-gray-700">在戶外，銀柏以其獨特的銀藍色針葉和低矮匍匐的姿態，成為優秀的地被植物或岩石園的點綴。它象徵著堅韌、寧靜與持久，能創造出富有層次感的自然景觀。</p>
+                    <p class="text-stone-700">在戶外，銀柏以其獨特的銀藍色針葉和低矮匍匐的姿態，成為優秀的地被植物或岩石園的點綴。它象徵著堅韌、寧靜與持久，能創造出富有層次感的自然景觀。</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200">
-                    <h3 class="font-bold text-xl mb-3 text-gray-800 flex items-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200">
+                    <h3 class="font-bold text-xl mb-3 text-stone-800 flex items-center">
                         <span class="text-2xl mr-2">🏞️</span>盆中的藝術
                     </h3>
-                    <p class="text-gray-700">銀柏是極受歡迎的盆景（Bonsai）樹種。透過修剪、雕塑與蟠紮，可以將其塑造成模仿懸崖、古木等自然姿態的藝術品。這時，盆器便成為了畫框，共同構成完整的藝術表達。</p>
+                    <p class="text-stone-700">銀柏是極受歡迎的盆景（Bonsai）樹種。透過修剪、雕塑與蟠紮，可以將其塑造成模仿懸崖、古木等自然姿態的藝術品。這時，盆器便成為了畫框，共同構成完整的藝術表達。</p>
                 </div>
             </div>
         </section>
@@ -101,8 +105,8 @@
         <!-- Section 2: Pot Selector -->
         <section id="selector" class="mb-16 scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">盆器定位：互動風格選擇器</h2>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600">盆器定義了銀柏的性格。點擊下方不同的市場定位，探索最適合您的商業攝影與銷售策略的盆器風格，並獲取專業的攝影建議。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-4">盆器定位：互動風格選擇器</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-600">盆器定義了銀柏的性格。點擊下方不同的市場定位，探索最適合您的商業攝影與銷售策略的盆器風格，並獲取專業的攝影建議。</p>
             </div>
 
             <div class="flex flex-wrap justify-center gap-3 md:gap-4 mb-8">
@@ -112,7 +116,7 @@
                 <button data-style="classic" class="pot-style-btn px-4 py-2 rounded-full font-semibold transition-all duration-300 ease-in-out shadow-sm inactive-tab">歐式古典</button>
             </div>
 
-            <div id="pot-display" class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-gray-200 transition-opacity duration-500">
+            <div id="pot-display" class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-stone-200 transition-opacity duration-500">
                 <!-- Content will be dynamically inserted here by JavaScript -->
             </div>
         </section>
@@ -120,86 +124,86 @@
         <!-- Section 3: Cultivation Guide -->
         <section id="cultivation" class="mb-16 scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">在地化栽培：台灣氣候介質方案</h2>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600">銀柏的根系最怕濕悶。針對台灣各地不同的濕度與降雨量，我們提供視覺化的介質配方，確保根系健康，葉色亮麗。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-4">在地化栽培：台灣氣候介質方案</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-600">銀柏的根系最怕濕悶。針對台灣各地不同的濕度與降雨量，我們提供視覺化的介質配方，確保根系健康，葉色亮麗。</p>
             </div>
 
-            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-gray-200">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8 border border-stone-200">
                 <div class="mb-6">
-                     <h3 class="font-bold text-2xl text-center mb-4 text-gray-700">介質核心：極致排水</h3>
-                     <p class="text-center max-w-2xl mx-auto text-gray-600">成功的關鍵在於介質必須<strong class="text-blue-600">快速排掉多餘水份，同時保留足夠的空氣</strong>。因此，所有配方都以顆粒介質為主，避免使用易板結的純培養土。</p>
+                     <h3 class="font-bold text-2xl text-center mb-4 text-stone-700">介質核心：極致排水</h3>
+                     <p class="text-center max-w-2xl mx-auto text-stone-600">成功的關鍵在於介質必須<strong class="text-green-800">快速排掉多餘水份，同時保留足夠的空氣</strong>。因此，所有配方都以顆粒介質為主，避免使用易板結的純培養土。</p>
                 </div>
 
                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
                     <div class="text-center">
                         <h4 class="font-bold text-xl mb-2">北部、東部</h4>
-                        <p class="text-sm text-gray-500 mb-4 h-12">潮濕多雨，強調最高排水性，防止爛根。</p>
+                        <p class="text-sm text-stone-500 mb-4 h-12">潮濕多雨，強調最高排水性，防止爛根。</p>
                         <div class="chart-container"><canvas id="mixNorthEastChart"></canvas></div>
                     </div>
                     <div class="text-center">
                         <h4 class="font-bold text-xl mb-2">中部</h4>
-                        <p class="text-sm text-gray-500 mb-4 h-12">氣候穩定，採用均衡配方，兼顧排水與保水。</p>
+                        <p class="text-sm text-stone-500 mb-4 h-12">氣候穩定，採用均衡配方，兼顧排水與保水。</p>
                         <div class="chart-container"><canvas id="mixCentralChart"></canvas></div>
                     </div>
                      <div class="text-center">
                         <h4 class="font-bold text-xl mb-2">南部</h4>
-                        <p class="text-sm text-gray-500 mb-4 h-12">炎熱乾燥，適度增加保水性，減少澆水壓力。</p>
+                        <p class="text-sm text-stone-500 mb-4 h-12">炎熱乾燥，適度增加保水性，減少澆水壓力。</p>
                         <div class="chart-container"><canvas id="mixSouthChart"></canvas></div>
                     </div>
                     <div class="text-center">
                         <h4 class="font-bold text-xl mb-2">通用懶人配方</h4>
-                        <p class="text-sm text-gray-500 mb-4 h-12">若不想區分，此配方在多數情況下安全可靠。</p>
+                        <p class="text-sm text-stone-500 mb-4 h-12">若不想區分，此配方在多數情況下安全可靠。</p>
                         <div class="chart-container"><canvas id="mixGeneralChart"></canvas></div>
                     </div>
                 </div>
 
-                <div class="mt-8 pt-6 border-t border-gray-200">
+                <div class="mt-8 pt-6 border-t border-stone-200">
                     <h4 class="font-bold text-xl text-center mb-4">介質成分解析</h4>
                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 text-center">
-                        <div class="bg-gray-100 p-3 rounded-lg"><h5 class="font-semibold">赤玉土</h5><p class="text-xs text-gray-500">結構、通氣、保水</p></div>
-                        <div class="bg-gray-100 p-3 rounded-lg"><h5 class="font-semibold">鹿沼土</h5><p class="text-xs text-gray-500">酸性、通氣</p></div>
-                        <div class="bg-gray-100 p-3 rounded-lg"><h5 class="font-semibold">富士砂/桐生砂</h5><p class="text-xs text-gray-500">極佳排水、重量</p></div>
-                        <div class="bg-gray-100 p-3 rounded-lg"><h5 class="font-semibold">泥炭土/椰纖</h5><p class="text-xs text-gray-500">保水、提供養分</p></div>
-                        <div class="bg-gray-100 p-3 rounded-lg"><h5 class="font-semibold">竹炭/稻殼炭</h5><p class="text-xs text-gray-500">淨化、防腐</p></div>
-                        <div class="bg-gray-100 p-3 rounded-lg"><h5 class="font-semibold">緩釋肥</h5><p class="text-xs text-gray-500">基礎養分</p></div>
+                        <div class="bg-stone-100 p-3 rounded-lg"><h5 class="font-semibold">赤玉土</h5><p class="text-xs text-stone-500">結構、通氣、保水</p></div>
+                        <div class="bg-stone-100 p-3 rounded-lg"><h5 class="font-semibold">鹿沼土</h5><p class="text-xs text-stone-500">酸性、通氣</p></div>
+                        <div class="bg-stone-100 p-3 rounded-lg"><h5 class="font-semibold">富士砂/桐生砂</h5><p class="text-xs text-stone-500">極佳排水、重量</p></div>
+                        <div class="bg-stone-100 p-3 rounded-lg"><h5 class="font-semibold">泥炭土/椰纖</h5><p class="text-xs text-stone-500">保水、提供養分</p></div>
+                        <div class="bg-stone-100 p-3 rounded-lg"><h5 class="font-semibold">竹炭/稻殼炭</h5><p class="text-xs text-stone-500">淨化、防腐</p></div>
+                        <div class="bg-stone-100 p-3 rounded-lg"><h5 class="font-semibold">緩釋肥</h5><p class="text-xs text-stone-500">基礎養分</p></div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Plant Profile -->
+        <!-- Section 4: Plant Profile (Updated Lighting Info) -->
         <section id="profile" class="scroll-mt-24">
             <div class="text-center mb-10">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">植物速覽檔案</h2>
-                <p class="max-w-3xl mx-auto text-lg text-gray-600">快速掌握銀柏的核心美學與生長特徵。</p>
+                <h2 class="text-3xl md:text-4xl font-bold text-stone-800 mb-4">養護速覽檔案</h2>
+                <p class="max-w-3xl mx-auto text-lg text-stone-600">快速掌握銀柏的核心養護需求，確保其展現最佳狀態。</p>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 text-center">
                     <div class="text-4xl mb-3">💧</div>
                     <h3 class="text-xl font-bold mb-2">澆水策略</h3>
-                    <p class="text-gray-600">極度耐旱。盆土完全乾燥後再澆透。切忌盆內積水，這是栽培失敗主因。</p>
+                    <p class="text-stone-600">極度耐旱。盆土完全乾燥後再澆透。切忌盆內積水，這是栽培失敗主因。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 text-center">
                     <div class="text-4xl mb-3">☀️</div>
                     <h3 class="text-xl font-bold mb-2">光照需求</h3>
-                    <p class="text-gray-600">全日照是必須。充足陽光能讓葉色更藍、更亮，株型更緊湊，避免徒長。</p>
+                    <p class="text-stone-600"><strong>每日至少6-8小時的直射陽光是必須的！</strong>充足的全日照才能讓葉色保持迷人的銀藍色澤。光照不足會導致葉色返綠、枝條徒長，失去其緊湊優美的形態。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 text-center">
                     <div class="text-4xl mb-3">✂️</div>
                     <h3 class="text-xl font-bold mb-2">修剪塑形</h3>
-                    <p class="text-gray-600">耐修剪，是進行塑形、製作盆景的絕佳材料。定期修剪可維持優美形態。</p>
+                    <p class="text-stone-600">耐修剪，是進行塑形、製作盆景的絕佳材料。定期修剪可維持優美形態，促進通風。</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-200 text-center">
-                    <div class="text-4xl mb-3">❄️</div>
-                    <h3 class="text-xl font-bold mb-2">耐寒耐熱</h3>
-                    <p class="text-gray-600">生命力強健，既耐高溫也耐寒冷，能適應台灣絕大多數地區的氣候。</p>
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-stone-200 text-center">
+                    <div class="text-4xl mb-3">💨</div>
+                    <h3 class="text-xl font-bold mb-2">通風環境</h3>
+                    <p class="text-stone-600">喜愛良好通風的環境，有助於預防病蟲害，並讓介質適時乾燥，對根系健康至關重要。</p>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <footer class="bg-gray-800 text-gray-300 mt-16">
+    <footer class="bg-stone-800 text-stone-300 mt-16">
         <div class="container mx-auto px-4 py-6 text-center">
             <p>互動式銀柏銷售指南 | 為商業成功而生</p>
         </div>
@@ -220,7 +224,6 @@
             });
 
             // Pot Selector Data
-            // Rationale for style choices: These four styles cover the primary markets for junipers, from traditional bonsai enthusiasts to modern interior decorators.
             const potStyles = {
                 zen: {
                     title: '日式禪風：靜謐的微縮景觀',
@@ -256,17 +259,17 @@
                 potDisplay.style.opacity = 0;
                 setTimeout(() => {
                     potDisplay.innerHTML = `
-                        <h3 class="text-2xl font-bold mb-4 text-gray-800">${data.title}</h3>
+                        <h3 class="text-2xl font-bold mb-4 text-stone-800">${data.title}</h3>
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <h4 class="font-semibold text-lg mb-2 text-gray-700">推薦材質</h4>
-                                <p class="text-gray-600 mb-4">${data.materials}</p>
-                                <h4 class="font-semibold text-lg mb-2 text-gray-700">風格理念</h4>
-                                <p class="text-gray-600">${data.philosophy}</p>
+                                <h4 class="font-semibold text-lg mb-2 text-stone-700">推薦材質</h4>
+                                <p class="text-stone-600 mb-4">${data.materials}</p>
+                                <h4 class="font-semibold text-lg mb-2 text-stone-700">風格理念</h4>
+                                <p class="text-stone-600">${data.philosophy}</p>
                             </div>
-                            <div class="bg-gray-100 p-4 rounded-lg">
-                                <h4 class="font-semibold text-lg mb-2 text-blue-600">攝影目標</h4>
-                                <p class="text-gray-600">${data.photoGoal}</p>
+                            <div class="bg-stone-100 p-4 rounded-lg">
+                                <h4 class="font-semibold text-lg mb-2 text-green-800">攝影目標</h4>
+                                <p class="text-stone-600">${data.photoGoal}</p>
                             </div>
                         </div>
                     `;
@@ -313,43 +316,28 @@
 
             new Chart(document.getElementById('mixNorthEastChart'), {
                 type: 'doughnut',
-                data: {
-                    labels: commonLabels,
-                    datasets: [{ data: [4, 2, 3, 1, 1], backgroundColor: chartColors, borderColor: '#F3F4F6', borderWidth: 2 }]
-                },
+                data: { labels: commonLabels, datasets: [{ data: [4, 2, 3, 1, 1], backgroundColor: chartColors, borderColor: '#F5F5F4', borderWidth: 2 }] },
                 options: chartOptions
             });
-
             new Chart(document.getElementById('mixCentralChart'), {
                 type: 'doughnut',
-                data: {
-                    labels: commonLabels,
-                    datasets: [{ data: [4, 1, 2, 2, 1], backgroundColor: chartColors, borderColor: '#F3F4F6', borderWidth: 2 }]
-                },
+                data: { labels: commonLabels, datasets: [{ data: [4, 1, 2, 2, 1], backgroundColor: chartColors, borderColor: '#F5F5F4', borderWidth: 2 }] },
                 options: chartOptions
             });
-            
             new Chart(document.getElementById('mixSouthChart'), {
                 type: 'doughnut',
-                data: {
-                    labels: commonLabels,
-                    datasets: [{ data: [3, 1, 2, 3, 1], backgroundColor: chartColors, borderColor: '#F3F4F6', borderWidth: 2 }]
-                },
+                data: { labels: commonLabels, datasets: [{ data: [3, 1, 2, 3, 1], backgroundColor: chartColors, borderColor: '#F5F5F4', borderWidth: 2 }] },
                 options: chartOptions
             });
-
             new Chart(document.getElementById('mixGeneralChart'), {
                 type: 'doughnut',
-                data: {
-                    labels: commonLabels,
-                    datasets: [{ data: [4, 1, 3, 2, 1], backgroundColor: chartColors, borderColor: '#F3F4F6', borderWidth: 2 }]
-                },
+                data: { labels: commonLabels, datasets: [{ data: [4, 1, 3, 2, 1], backgroundColor: chartColors, borderColor: '#F5F5F4', borderWidth: 2 }] },
                 options: chartOptions
             });
 
             // Active nav link on scroll
             const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('header nav a');
+            const navLinks = document.querySelectorAll('header nav a, #mobile-menu a');
             window.addEventListener('scroll', () => {
                 let current = '';
                 sections.forEach(section => {
@@ -360,7 +348,7 @@
                 });
                 navLinks.forEach(a => {
                     a.classList.remove('active-nav', 'inactive-nav');
-                    if (a.href.includes(current)) {
+                    if (a.hash === '#' + current) {
                         a.classList.add('active-nav');
                     } else {
                         a.classList.add('inactive-nav');
@@ -371,4 +359,3 @@
     </script>
 </body>
 </html>
-
