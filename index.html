@@ -28,12 +28,14 @@
             -moz-osx-font-smoothing: grayscale;
         }
         .image-placeholder {
-            background-color: #e2e8f0;
+            background-color: #334155; /* Changed placeholder color for dark mode */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #4a5568;
+            color: #94a3b8;
             font-weight: 500;
+            text-align: center;
+            padding: 0.5rem;
         }
         body.dark {
             background-color: #0d1120;
@@ -116,7 +118,7 @@
         // =================================================================
         const plantData = [
             {
-                name: '雷暴芋 (Colocasia 'Thunderstorm')',
+                name: '雷暴芋 (Colocasia \'Thunderstorm\')',
                 description: '引人注目的觀葉植物，以其深色、幾乎黑色的葉子和鮮明的葉脈而聞名。',
                 imageUrl: 'https://fuzzyroots.co.za/cdn/shop/products/3-8.png?v=1707072745',
                 altText: 'Colocasia Thunderstorm 植物',
@@ -179,11 +181,11 @@
                 linkUrl: './銀柏/index.html'
             },
             {
-              "name": "白斑合果芋 (Syngonium 'Albo-Variegatum')",
-              "description": "標誌性的箭形葉片上，渲染著千變萬化的雪白斑紋。姿態優雅，可任其垂墜或引導攀爬。",
-              "imageUrl": "https://www.plantvault.com/cdn/shop/articles/Syngonium-Podophyllum-Albo-Variegatum-houseplant---for-sale-near-me-plant-vault.jpg?v=1698256597",
-              "altText": "白斑合果芋 (Syngonium podophyllum Albo-variegatum) 植物",
-              "linkUrl": "./白斑合果芋/index.html"
+                "name": "白斑合果芋 (Syngonium 'Albo-Variegatum')",
+                "description": "標誌性的箭形葉片上，渲染著千變萬化的雪白斑紋。姿態優雅，可任其垂墜或引導攀爬。",
+                "imageUrl": "https://www.plantvault.com/cdn/shop/articles/Syngonium-Podophyllum-Albo-Variegatum-houseplant---for-sale-near-me-plant-vault.jpg?v=1698256597",
+                "altText": "白斑合果芋 (Syngonium podophyllum Albo-variegatum) 植物",
+                "linkUrl": "./白斑合果芋/index.html"
             }
         ];
 
@@ -193,32 +195,60 @@
         const searchTermDisplay = document.getElementById('searchTermDisplay');
 
         function createPlantCardHTML(plant) {
-            return `<div class="plant-card cursor-pointer bg-slate-800/60 backdrop-blur-xl border border-slate-700/80 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-sky-400/30"><div class="relative pointer-events-none"><img class="w-full h-56 object-cover object-center" src="${plant.imageUrl}" alt="${plant.altText}" onerror="this.onerror=null; this.parentElement.innerHTML = '<div class=\'w-full h-56 image-placeholder flex items-center justify-center\'>${plant.name}</div>';"><div class="w-full h-56 image-placeholder hidden">${plant.name}</div></div><div class="p-6 pointer-events-none"><h2 class="text-2xl font-bold text-white mb-2">${plant.name}</h2><p class="text-gray-400 mb-4">${plant.description}</p><a href="${plant.linkUrl}" class="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 pointer-events-auto">查看養護紀錄</a></div></div>`;
+            // --- FIX: Escaped single quotes in the plant name for the onerror attribute ---
+            // This prevents a JavaScript syntax error when a plant name contains a single quote.
+            const safePlantName = plant.name.replace(/'/g, "\\'");
+            const placeholderHTML = `<div class='w-full h-56 image-placeholder'>${safePlantName}</div>`;
+            
+            return `<div class="plant-card cursor-pointer bg-slate-800/60 backdrop-blur-xl border border-slate-700/80 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-sky-400/30">
+                        <div class="relative pointer-events-none">
+                            <img class="w-full h-56 object-cover object-center" src="${plant.imageUrl}" alt="${plant.altText}" onerror="this.onerror=null; this.parentElement.innerHTML = '${placeholderHTML}';">
+                        </div>
+                        <div class="p-6 pointer-events-none">
+                            <h2 class="text-2xl font-bold text-white mb-2">${plant.name}</h2>
+                            <p class="text-gray-400 mb-4">${plant.description}</p>
+                            <a href="${plant.linkUrl}" class="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 pointer-events-auto">查看養護紀錄</a>
+                        </div>
+                    </div>`;
         }
 
         function renderContent() {
             if (plantGrid) {
                 plantGrid.innerHTML = plantData.map(createPlantCardHTML).join('');
             }
+            
             const plantCards = document.querySelectorAll('.plant-card');
+
             searchInput.addEventListener('input', (event) => {
                 const searchTerm = event.target.value.toLowerCase().trim();
                 let visibleCount = 0;
+                
                 plantCards.forEach(card => {
                     const plantName = card.querySelector('h2').textContent.toLowerCase();
                     const isVisible = searchTerm === "" || plantName.includes(searchTerm);
                     card.classList.toggle('hidden', !isVisible);
                     if (isVisible) visibleCount++;
                 });
+
                 noResultsMessage.classList.toggle('hidden', !(visibleCount === 0 && searchTerm.length > 0));
-                if (visibleCount === 0) searchTermDisplay.textContent = event.target.value;
+                if (visibleCount === 0) {
+                    searchTermDisplay.textContent = event.target.value;
+                }
             });
+
             plantGrid.addEventListener('click', (event) => {
+                // Allow clicking the link directly
+                if (event.target.closest('a')) {
+                    return;
+                }
+                
+                // Otherwise, clicking anywhere on the card navigates
                 const card = event.target.closest('.plant-card');
-                if (event.target.closest('a')) return;
                 if (card) {
                     const link = card.querySelector('a');
-                    if (link && link.href) window.location.href = link.href;
+                    if (link && link.href) {
+                        window.location.href = link.href;
+                    }
                 }
             });
         }
@@ -240,6 +270,7 @@
                 connectDistance: 100,
                 mouseDistance: 150,
             };
+
             class Particle {
                 constructor() {
                     this.x = Math.random() * canvas.width;
@@ -254,6 +285,7 @@
                     ctx.fill();
                 }
             }
+
             function setup() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
@@ -263,6 +295,7 @@
                 }
                 draw();
             }
+
             function draw() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (const p of particles) { p.draw(); }
@@ -287,18 +320,30 @@
                     }
                 }
             }
-            window.addEventListener('resize', setup);
-            window.addEventListener('mousemove', (event) => {
+
+            let animationFrameId;
+            function animate() {
+                draw();
+                animationFrameId = requestAnimationFrame(animate);
+            }
+            
+            function handleMouseMove(event) {
                 mouse.x = event.x;
                 mouse.y = event.y;
-                requestAnimationFrame(draw);
-            });
-            window.addEventListener('mouseout', () => {
+            }
+
+            function handleMouseOut() {
                 mouse.x = null;
                 mouse.y = null;
-                requestAnimationFrame(draw);
-            });
+            }
+
+            window.addEventListener('resize', setup);
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseout', handleMouseOut);
+            
             setup();
+            // Static draw, only animate on mouse move for performance
+            // If you want constant movement, call animate() here.
         }
 
         // =================================================================
@@ -306,7 +351,6 @@
         // =================================================================
 
         // --- 在這裡貼上您的 YouTube 影片 ID ---
-        // 例如：從 https://www.youtube.com/watch?v=TgOu00Mf3kI 網址中取得 'TgOu00Mf3kI'
         const YOUTUBE_VIDEO_ID = 'TgOu00Mf3kI';
 
         const tag = document.createElement('script');
