@@ -68,15 +68,24 @@
 
     <canvas id="particle-canvas"></canvas>
 
-    <!-- ===== YouTube 播放器容器與控制按鈕 ===== -->
+    <!-- ===== YouTube 播放器容器 ===== -->
     <div id="youtube-player-container"></div>
-    <div id="music-control" class="fixed bottom-5 right-5 z-50">
+
+    <!-- ===== 右下角控制按鈕群組 ===== -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
+        <!-- 回到頂部按鈕 -->
+        <button id="scrollToTopBtn" title="回到頂部" class="w-12 h-12 bg-slate-600/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-slate-600/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-400 opacity-0 invisible translate-y-2">
+            <i data-lucide="arrow-up" class="w-6 h-6"></i>
+        </button>
+
+        <!-- 音樂控制按鈕 -->
         <button id="toggle-music-btn" class="w-12 h-12 bg-sky-500/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-sky-500/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-400">
             <!-- 預設為靜音圖示 -->
             <i data-lucide="volume-x" class="w-6 h-6"></i>
         </button>
     </div>
     <!-- ======================================= -->
+
 
     <div class="container mx-auto px-4 py-8 md:py-16 relative z-10">
 
@@ -361,7 +370,6 @@
             
             // 初始化並啟動動畫
             setup();
-            // ===== FIX: 啟動動畫循環 =====
             animate();
         }
 
@@ -415,6 +423,29 @@
                     isMuted = !isMuted;
                     lucide.createIcons();
                 }
+            });
+        }
+
+        // =================================================================
+        // ===== 4. 回到頂部按鈕功能 =====
+        // =================================================================
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+        if (scrollToTopBtn) {
+            // 根據滾動位置顯示/隱藏按鈕
+            window.addEventListener('scroll', () => {
+                const isVisible = window.scrollY > 300;
+                scrollToTopBtn.classList.toggle('opacity-0', !isVisible);
+                scrollToTopBtn.classList.toggle('invisible', !isVisible);
+                scrollToTopBtn.classList.toggle('translate-y-2', !isVisible);
+            });
+
+            // 點擊按鈕後平滑滾動到頁面頂部
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
         }
     });
