@@ -16,7 +16,6 @@
     <style>
         @font-face {
             font-family: 'ChenYuluoyan';
-            /* 注意：這個字體路徑是相對的，需要您確保檔案位置正確 */
             src: url('./fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
             font-weight: normal;
             font-style: normal;
@@ -28,7 +27,7 @@
             -moz-osx-font-smoothing: grayscale;
         }
         .image-placeholder {
-            background-color: #334155; /* Changed placeholder color for dark mode */
+            background-color: #334155;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,7 +52,6 @@
         .font-chenyu {
             font-family: 'ChenYuluoyan', 'Noto Sans TC', sans-serif;
         }
-        /* 隱藏YouTube播放器 */
         #youtube-player-container {
             position: fixed;
             top: -9999px;
@@ -62,6 +60,42 @@
             height: 0;
             opacity: 0;
         }
+        
+        /* ===== 視差縮放懸停效果樣式 ===== */
+        .plant-card {
+            background: #1e293b; /* 卡片背景色 */
+            transform-style: preserve-3d;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .plant-card:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.4);
+        }
+
+        .card-image-container {
+            overflow: hidden; /* 關鍵：隱藏放大的圖片超出部分 */
+            border-radius: 0.75rem 0.75rem 0 0; /* 圖片容器也需要圓角 */
+        }
+        
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .plant-card:hover .card-image {
+            transform: scale(1.15); /* 懸停時放大圖片 */
+        }
+
+        .card-content {
+            transition: transform 0.5s ease;
+        }
+
+        .plant-card:hover .card-content {
+            transform: translateY(-10px); /* 懸停時文字向上移動 */
+        }
+
     </style>
 </head>
 <body class="bg-gray-100 dark text-gray-800 dark:text-gray-200">
@@ -80,7 +114,6 @@
 
         <!-- 音樂控制按鈕 -->
         <button id="toggle-music-btn" class="w-12 h-12 bg-sky-500/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-sky-500/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-400">
-            <!-- 預設為靜音圖示 -->
             <i data-lucide="volume-x" class="w-6 h-6"></i>
         </button>
     </div>
@@ -104,7 +137,7 @@
         </div>
 
         <main>
-            <div id="plantGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+            <div id="plantGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
                 <!-- 植物卡片將由 JavaScript 動態生成 -->
             </div>
 
@@ -190,29 +223,28 @@
                 linkUrl: './銀柏/index.html'
             },
             {
-                "name": "白斑合果芋 (Syngonium 'Albo-Variegatum')",
-                "description": "標誌性的箭形葉片上，渲染著千變萬化的雪白斑紋。姿態優雅，可任其垂墜或引導攀爬。",
-                "imageUrl": "https://www.plantvault.com/cdn/shop/articles/Syngonium-Podophyllum-Albo-Variegatum-houseplant---for-sale-near-me-plant-vault.jpg?v=1698256597",
-                "altText": "白斑合果芋 (Syngonium podophyllum Albo-variegatum) 植物",
-                "linkUrl": "./白斑合果芋/index.html"
+                name: '白斑合果芋 (Syngonium \'Albo-Variegatum\')',
+                description: '標誌性的箭形葉片上，渲染著千變萬化的雪白斑紋。姿態優雅，可任其垂墜或引導攀爬。',
+                imageUrl: 'https://www.plantvault.com/cdn/shop/articles/Syngonium-Podophyllum-Albo-Variegatum-houseplant---for-sale-near-me-plant-vault.jpg?v=1698256597',
+                altText: '白斑合果芋 (Syngonium podophyllum Albo-variegatum) 植物',
+                linkUrl: './白斑合果芋/index.html'
             },
             {
-                "name": "精選草莓 (Strawberry)",
-                "description": "果實鮮紅欲滴、乾淨無瑕。此方法能有效避免土壤病害，實現穩定產量與卓越品質。",
-                "imageUrl": "https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/11/jpichigogari_12.jpg.webp",
-                "altText": "以無土介質栽培的草莓，結出乾淨且飽滿的果實",
-                "linkUrl": "./草莓苗/index.html"
+                name: '精選草莓 (Strawberry)',
+                description: '果實鮮紅欲滴、乾淨無瑕。此方法能有效避免土壤病害，實現穩定產量與卓越品質。',
+                imageUrl: 'https://hk.wamazing.com/media/wp-content/uploads/sites/5/2019/11/jpichigogari_12.jpg.webp',
+                altText: '以無土介質栽培的草莓，結出乾淨且飽滿的果實',
+                linkUrl: './草莓苗/index.html'
             },
             {
-                "name": "經典盆栽玫瑰 (Classic Potted Rose)",
-                "description": "作為愛與美的永恆象徵，其多層次的花瓣與迷人香氣，無論在陽台、庭園或作為禮物，都是最經典的選擇。",
-                "imageUrl": "https://images.agriharvest.tw/wp-content/uploads/2025/03/%E7%8E%AB%E7%91%B025-1024x684.jpg",
-                "altText": "一盆盛開的經典紅玫瑰，展示其美麗的花朵與健康的綠葉。",
-                "linkUrl": "./玫瑰/index.html"
+                name: '經典盆栽玫瑰 (Classic Potted Rose)',
+                description: '作為愛與美的永恆象徵，其多層次的花瓣與迷人香氣，無論在陽台、庭園或作為禮物，都是最經典的選擇。',
+                imageUrl: 'https://images.agriharvest.tw/wp-content/uploads/2025/03/%E7%8E%AB%E7%91%B025-1024x684.jpg',
+                altText: '一盆盛開的經典紅玫瑰，展示其美麗的花朵與健康的綠葉。',
+                linkUrl: './玫瑰/index.html'
             }
         ];
 
-        // --- 新增：根據植物名稱自動排序資料 ---
         plantData.sort((a, b) => a.name.localeCompare(b.name, 'zh-Hant'));
 
         const plantGrid = document.getElementById('plantGrid');
@@ -224,15 +256,19 @@
             const safePlantName = plant.name.replace(/'/g, "\\'");
             const placeholderHTML = `<div class='w-full h-56 image-placeholder'>${safePlantName}</div>`;
             
-            return `<div class="plant-card cursor-pointer bg-slate-800/60 backdrop-blur-xl border border-slate-700/80 rounded-xl shadow-lg overflow-hidden transform transition-all duration-300 ease-in-out hover:-translate-y-2 hover:scale-105 hover:shadow-2xl hover:shadow-sky-400/30">
-                        <div class="relative pointer-events-none">
-                            <img class="w-full h-56 object-cover object-center" src="${plant.imageUrl}" alt="${plant.altText}" onerror="this.onerror=null; this.parentElement.innerHTML = '${placeholderHTML}';">
-                        </div>
-                        <div class="p-6 pointer-events-none">
-                            <h2 class="text-2xl font-bold text-white mb-2">${plant.name}</h2>
-                            <p class="text-gray-400 mb-4">${plant.description}</p>
-                            <a href="${plant.linkUrl}" class="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 pointer-events-auto">查看養護紀錄</a>
-                        </div>
+            return `<div class="plant-card cursor-pointer rounded-xl shadow-lg overflow-hidden flex flex-col">
+                        <a href="${plant.linkUrl}" class="block flex flex-col flex-grow">
+                            <div class="card-image-container h-56">
+                                <img class="card-image" src="${plant.imageUrl}" alt="${plant.altText}" onerror="this.onerror=null; this.parentElement.innerHTML = '${placeholderHTML}';">
+                            </div>
+                            <div class="card-content p-6 bg-slate-800/80 backdrop-blur-sm flex flex-col flex-grow">
+                                <h2 class="text-2xl font-bold text-white mb-2">${plant.name}</h2>
+                                <p class="text-gray-300 mb-4 text-sm">${plant.description}</p>
+                                <span class="inline-block bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md transition-colors duration-300 mt-auto self-start">
+                                    查看養護紀錄
+                                </span>
+                            </div>
+                        </a>
                     </div>`;
         }
 
@@ -260,19 +296,8 @@
                 }
             });
 
-            plantGrid.addEventListener('click', (event) => {
-                if (event.target.closest('a')) {
-                    return;
-                }
-                
-                const card = event.target.closest('.plant-card');
-                if (card) {
-                    const link = card.querySelector('a');
-                    if (link && link.href) {
-                        window.location.href = link.href;
-                    }
-                }
-            });
+            // 為新特效初始化 JS
+            initializeHoverEffects();
         }
 
         renderContent();
@@ -287,128 +312,38 @@
             const ctx = canvas.getContext('2d');
             let particles = [];
             let mouse = { x: null, y: null };
-            const options = {
-                particleCount: window.innerWidth < 768 ? 80 : 150,
-                connectDistance: 100,
-                mouseDistance: 150,
-            };
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2 + 0.5;
-                    this.color = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.7})`;
-                }
-                draw() {
-                    ctx.fillStyle = this.color;
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function setup() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                particles = [];
-                for (let i = 0; i < options.particleCount; i++) {
-                    particles.push(new Particle());
-                }
-            }
-
-            function draw() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (const p of particles) { p.draw(); }
-                if (mouse.x) {
-                    for (let i = 0; i < particles.length; i++) {
-                        const p1 = particles[i];
-                        const distToMouse = Math.hypot(p1.x - mouse.x, p1.y - mouse.y);
-                        if (distToMouse < options.mouseDistance) {
-                            for (let j = i + 1; j < particles.length; j++) {
-                                const p2 = particles[j];
-                                const distBetweenParticles = Math.hypot(p1.x - p2.x, p1.y - p2.y);
-                                if (distBetweenParticles < options.connectDistance) {
-                                    ctx.beginPath();
-                                    ctx.strokeStyle = `rgba(224, 242, 254, ${1 - distBetweenParticles / options.connectDistance})`;
-                                    ctx.lineWidth = 0.4;
-                                    ctx.moveTo(p1.x, p1.y);
-                                    ctx.lineTo(p2.x, p2.y);
-                                    ctx.stroke();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
+            const options = { particleCount: window.innerWidth < 768 ? 80 : 150, connectDistance: 100, mouseDistance: 150, };
+            class Particle { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 0.5; this.color = `rgba(255, 255, 255, ${Math.random() * 0.3 + 0.7})`; } draw() { ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
+            function setup() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; particles = []; for (let i = 0; i < options.particleCount; i++) { particles.push(new Particle()); } }
+            function draw() { ctx.clearRect(0, 0, canvas.width, canvas.height); for (const p of particles) { p.draw(); } if (mouse.x) { for (let i = 0; i < particles.length; i++) { const p1 = particles[i]; const distToMouse = Math.hypot(p1.x - mouse.x, p1.y - mouse.y); if (distToMouse < options.mouseDistance) { for (let j = i + 1; j < particles.length; j++) { const p2 = particles[j]; const distBetweenParticles = Math.hypot(p1.x - p2.x, p1.y - p2.y); if (distBetweenParticles < options.connectDistance) { ctx.beginPath(); ctx.strokeStyle = `rgba(224, 242, 254, ${1 - distBetweenParticles / options.connectDistance})`; ctx.lineWidth = 0.4; ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); } } } } } }
             let animationFrameId;
-            function animate() {
-                draw();
-                animationFrameId = requestAnimationFrame(animate);
-            }
-            
-            function handleMouseMove(event) {
-                mouse.x = event.x;
-                mouse.y = event.y;
-            }
-
-            function handleMouseOut() {
-                mouse.x = null;
-                mouse.y = null;
-            }
-
-            window.addEventListener('resize', () => {
-                // 取消舊的動畫幀
-                cancelAnimationFrame(animationFrameId);
-                // 重新設定畫布並啟動動畫
-                setup();
-                animate();
-            });
+            function animate() { draw(); animationFrameId = requestAnimationFrame(animate); }
+            function handleMouseMove(event) { mouse.x = event.x; mouse.y = event.y; }
+            function handleMouseOut() { mouse.x = null; mouse.y = null; }
+            window.addEventListener('resize', () => { cancelAnimationFrame(animationFrameId); setup(); animate(); });
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('mouseout', handleMouseOut);
-            
-            // 初始化並啟動動畫
-            setup();
-            animate();
+            setup(); animate();
         }
 
         // =================================================================
         // ===== 3. YouTube 背景音樂控制 =====
         // =================================================================
-
         const YOUTUBE_VIDEO_ID = 'TgOu00Mf3kI';
-
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         const firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
         let player;
         let isMuted = true;
-
         window.onYouTubeIframeAPIReady = function() {
             player = new YT.Player('youtube-player-container', {
-                height: '315',
-                width: '560',
-                videoId: YOUTUBE_VIDEO_ID,
-                playerVars: {
-                    'autoplay': 1,
-                    'controls': 0,
-                    'loop': 1,
-                    'playlist': YOUTUBE_VIDEO_ID,
-                    'mute': 1
-                },
-                events: {
-                    'onReady': onPlayerReady
-                }
+                height: '315', width: '560', videoId: YOUTUBE_VIDEO_ID,
+                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': YOUTUBE_VIDEO_ID, 'mute': 1 },
+                events: { 'onReady': onPlayerReady }
             });
         }
-
-        function onPlayerReady(event) {
-            event.target.playVideo();
-        }
-
+        function onPlayerReady(event) { event.target.playVideo(); }
         const toggleMusicBtn = document.getElementById('toggle-music-btn');
         if (toggleMusicBtn) {
             toggleMusicBtn.addEventListener('click', () => {
@@ -430,21 +365,57 @@
         // ===== 4. 回到頂部按鈕功能 =====
         // =================================================================
         const scrollToTopBtn = document.getElementById('scrollToTopBtn');
-
         if (scrollToTopBtn) {
-            // 根據滾動位置顯示/隱藏按鈕
             window.addEventListener('scroll', () => {
                 const isVisible = window.scrollY > 300;
                 scrollToTopBtn.classList.toggle('opacity-0', !isVisible);
                 scrollToTopBtn.classList.toggle('invisible', !isVisible);
                 scrollToTopBtn.classList.toggle('translate-y-2', !isVisible);
             });
-
-            // 點擊按鈕後平滑滾動到頁面頂部
             scrollToTopBtn.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // =================================================================
+        // ===== 5. 視差縮放懸停效果 JS =====
+        // =================================================================
+        function initializeHoverEffects() {
+            const allCards = document.querySelectorAll('.plant-card');
+
+            allCards.forEach((card) => {
+                const image = card.querySelector('.card-image');
+                
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    // 計算滑鼠位置百分比
+                    const xPercent = x / rect.width;
+                    const yPercent = y / rect.height;
+
+                    // 旋轉角度，中心點為0度，邊緣為 +/- 8度
+                    const rotateX = (yPercent - 0.5) * 2 * -8;
+                    const rotateY = (xPercent - 0.5) * 2 * 8;
+
+                    // 應用到卡片本身，創造3D傾斜感
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+                    
+                    // 根據滑鼠位置移動圖片，創造視差感
+                    if (image) {
+                        const moveX = (xPercent - 0.5) * 20;
+                        const moveY = (yPercent - 0.5) * 20;
+                        image.style.transform = `scale(1.2) translateX(${moveX}px) translateY(${moveY}px)`;
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    // 滑鼠離開時恢復原狀
+                    card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)';
+                    if (image) {
+                        image.style.transform = 'scale(1) translateX(0px) translateY(0px)';
+                    }
                 });
             });
         }
