@@ -306,7 +306,6 @@
                 for (let i = 0; i < options.particleCount; i++) {
                     particles.push(new Particle());
                 }
-                draw();
             }
 
             function draw() {
@@ -350,11 +349,20 @@
                 mouse.y = null;
             }
 
-            window.addEventListener('resize', setup);
+            window.addEventListener('resize', () => {
+                // 取消舊的動畫幀
+                cancelAnimationFrame(animationFrameId);
+                // 重新設定畫布並啟動動畫
+                setup();
+                animate();
+            });
             window.addEventListener('mousemove', handleMouseMove);
             window.addEventListener('mouseout', handleMouseOut);
             
+            // 初始化並啟動動畫
             setup();
+            // ===== FIX: 啟動動畫循環 =====
+            animate();
         }
 
         // =================================================================
