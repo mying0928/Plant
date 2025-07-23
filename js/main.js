@@ -1,5 +1,6 @@
 // 引入所有需要的模組
-import { plantData } from './modules/data.js';
+// 【修正】使用根相對路徑，以適應 GitHub Pages 的子目錄環境
+import { plantData } from '/Plant/js/modules/data.js';
 import { renderPlantGrid, setupSearch } from './modules/ui.js';
 import { initializeParticleEffect, initializeHoverEffects } from './modules/effects.js';
 import { initializeMusicPlayer, initializeScrollToTop } from './modules/controls.js';
