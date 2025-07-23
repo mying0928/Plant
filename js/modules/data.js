@@ -1,4 +1,7 @@
-[
+// 這個模組專門用來提供植物資料。
+// 【變更】將 JSON 陣列改為一個可導出的 JavaScript 常數。
+
+export const plantData = [
     {
         "name": "雷暴芋 (Colocasia 'Thunderstorm')",
         "description": "引人注目的觀葉植物，以其深色、幾乎黑色的葉子和鮮明的葉脈而聞名。",
@@ -90,5 +93,5 @@
         "altText": "以多彩葉片為特色的彩葉草。",
         "linkUrl": "/Plant/js/modules/plants/彩葉草/index.html"
     }
-]
+];
 
