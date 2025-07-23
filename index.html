@@ -14,148 +14,60 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
-        @font-face {
-            font-family: 'ChenYuluoyan';
-            src: url('./fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        body {
-            font-family: 'Inter', 'Noto Sans TC', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        .image-placeholder {
-            background-color: #334155;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #94a3b8;
-            font-weight: 500;
-            text-align: center;
-            padding: 0.5rem;
-        }
-        body.dark {
-            background-color: #0d1120;
-            background-image: linear-gradient(160deg, #191e3e 0%, #0d1120 100%);
-            background-attachment: fixed;
-        }
-        #particle-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-        .font-chenyu {
-            font-family: 'ChenYuluoyan', 'Noto Sans TC', sans-serif;
-        }
-        #youtube-player-container {
-            position: fixed;
-            top: -9999px;
-            left: -9999px;
-            width: 0;
-            height: 0;
-            opacity: 0;
-        }
-        
-        /* ===== 視差縮放懸停效果樣式 ===== */
-        .plant-card {
-            background: #1e293b; /* 卡片背景色 */
-            transform-style: preserve-3d;
-            /* 移除 transform 的 transition，改由 JS 控制，但保留 box-shadow 的 transition */
-            transition: box-shadow 0.5s ease;
-        }
-
-        .plant-card:hover {
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.4);
-        }
-
-        .card-image-container {
-            overflow: hidden; /* 關鍵：隱藏放大的圖片超出部分 */
-            border-radius: 0.75rem 0.75rem 0 0; /* 圖片容器也需要圓角 */
-        }
-        
-        .card-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* 移除 transform 的 transition，讓 JS 控制更即時 */
-        }
-
-        .plant-card:hover .card-image {
-             /* 這個效果現在由 JS 控制，但保留以防 JS 失效 */
-            transform: scale(1.15);
-        }
-
-        .card-content {
-            transition: transform 0.5s ease;
-        }
-
-        .plant-card:hover .card-content {
-            transform: translateY(-10px); /* 懸停時文字向上移動 */
-        }
-
+        /* 您的 CSS 樣式保持不變 */
+        @font-face { font-family: 'ChenYuluoyan'; src: url('./fonts/ChenYuluoyan-2.0-Thin.ttf') format('truetype'); font-weight: normal; font-style: normal; }
+        body { font-family: 'Inter', 'Noto Sans TC', sans-serif; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        .image-placeholder { background-color: #334155; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-weight: 500; text-align: center; padding: 0.5rem; }
+        body.dark { background-color: #0d1120; background-image: linear-gradient(160deg, #191e3e 0%, #0d1120 100%); background-attachment: fixed; }
+        #particle-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .font-chenyu { font-family: 'ChenYuluoyan', 'Noto Sans TC', sans-serif; }
+        #youtube-player-container { position: fixed; top: -9999px; left: -9999px; width: 0; height: 0; opacity: 0; }
+        .plant-card { background: #1e293b; transform-style: preserve-3d; transition: box-shadow 0.5s ease; }
+        .plant-card:hover { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.4); }
+        .card-image-container { overflow: hidden; border-radius: 0.75rem 0.75rem 0 0; }
+        .card-image { width: 100%; height: 100%; object-fit: cover; }
+        .plant-card:hover .card-image { transform: scale(1.15); }
+        .card-content { transition: transform 0.5s ease; }
+        .plant-card:hover .card-content { transform: translateY(-10px); }
     </style>
 </head>
 <body class="bg-gray-100 dark text-gray-800 dark:text-gray-200">
 
+    <!-- 您的 HTML 結構保持不變 -->
     <canvas id="particle-canvas"></canvas>
-
-    <!-- ===== YouTube 播放器容器 ===== -->
     <div id="youtube-player-container"></div>
-
-    <!-- ===== 右下角控制按鈕群組 ===== -->
     <div class="fixed bottom-5 right-5 z-50 flex flex-col gap-3">
-        <!-- 回到頂部按鈕 -->
-        <button id="scrollToTopBtn" title="回到頂部" class="w-12 h-12 bg-slate-600/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-slate-600/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-400 opacity-0 invisible translate-y-2">
-            <i data-lucide="arrow-up" class="w-6 h-6"></i>
-        </button>
-
-        <!-- 音樂控制按鈕 -->
-        <button id="toggle-music-btn" class="w-12 h-12 bg-sky-500/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-sky-500/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-400">
-            <i data-lucide="volume-x" class="w-6 h-6"></i>
-        </button>
+        <button id="scrollToTopBtn" title="回到頂部" class="w-12 h-12 bg-slate-600/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-slate-600/80 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-slate-400 opacity-0 invisible translate-y-2"><i data-lucide="arrow-up" class="w-6 h-6"></i></button>
+        <button id="toggle-music-btn" class="w-12 h-12 bg-sky-500/50 text-white rounded-full flex items-center justify-center backdrop-blur-md shadow-lg hover:bg-sky-500/80 transition-all focus:outline-none focus:ring-2 focus:ring-sky-400"><i data-lucide="volume-x" class="w-6 h-6"></i></button>
     </div>
-    <!-- ======================================= -->
-
-
     <div class="container mx-auto px-4 py-8 md:py-16 relative z-10">
-
         <header class="text-center mb-8">
             <h1 class="text-4xl md:text-5xl font-bold text-sky-400 dark:text-sky-300 font-chenyu">植物養護紀錄</h1>
             <p class="mt-4 text-lg text-gray-600 dark:text-gray-400">記錄每一棵植物的成長，分享專業的養護心得。</p>
         </header>
-
         <div class="mb-12 max-w-2xl mx-auto">
             <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <i data-lucide="search" class="w-5 h-5 text-gray-200"></i>
-                </span>
+                <span class="absolute inset-y-0 left-0 flex items-center pl-3"><i data-lucide="search" class="w-5 h-5 text-gray-200"></i></span>
                 <input type="text" id="searchInput" placeholder="搜尋植物名稱..." class="w-full pl-10 pr-4 py-3 border border-slate-500 rounded-full bg-slate-900/80 backdrop-blur-md text-gray-100 focus:outline-none focus:ring-2 focus:ring-sky-500">
             </div>
         </div>
-
         <main>
             <div id="plantGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
                 <!-- 植物卡片將由 JavaScript 動態生成 -->
             </div>
-
             <div id="noResultsMessage" class="text-center text-gray-500 dark:text-gray-400 py-10 hidden">
                 <h3 class="text-2xl font-semibold">找不到結果</h3>
                 <p class="mt-2">抱歉，沒有找到符合「<span id="searchTermDisplay" class="font-semibold text-gray-300"></span>」的植物。</p>
             </div>
         </main>
-
         <footer class="text-center mt-16">
             <p class="text-gray-500 dark:text-gray-400">&copy; <span id="year"></span> 我的植物養護紀錄. All Rights Reserved.</p>
         </footer>
     </div>
 
-    <!-- 關鍵變更：移除了路徑最前面的 './' -->
-    <script type="module" src="js/main.js"></script>
+    <!-- 【關鍵修正】使用根相對路徑來載入主腳本 -->
+    <script type="module" src="/Plant/js/main.js"></script>
 
 </body>
 </html>
+
